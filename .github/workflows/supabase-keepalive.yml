@@ -24,8 +24,8 @@ jobs:
       - name: Generate Contribution Commit
         run: |
           echo "Last keep-alive ping: $(date)" > .keepalive
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "Ranish"
+          git config --global user.email "ranishdutta@gmail.com"
           git add .keepalive
           git commit -m "chore: automate keep-alive ping and profile contribution" || echo "No changes to commit"
           git push
