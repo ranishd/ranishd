@@ -21,7 +21,7 @@ My focus is on engineering zero-latency user experiences backed by robust, data-
 I'm always looking to connect with brilliant minds, collaborate on ambitious projects, or tackle the next big technical challenge.
 
 - **Email:** ranishdutta@gmail.com
-- **LinkedIn:** [Connect with me](https://www.linkedin.com/in/ranish-undefined-3a51a936b/)
+- **LinkedIn:** [Connect with me](https://www.linkedin.com/in/ranish-dutta-3a51a936b/)
 
 ---
 <br/>
