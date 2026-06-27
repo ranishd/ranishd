@@ -1,0 +1,17 @@
+name: Supabase Keep-Alive Cron
+
+on:
+  schedule:
+    # Runs at 00:00 every 3 days
+    - cron: '0 0 */3 * *'
+  workflow_dispatch: # Allows manual trigger from the GitHub UI
+
+jobs:
+  ping-databases:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supply Chain Dashboard Supabase
+        run: curl -I -X GET "https://tobopzxfqkcfxfhkvdap.supabase.co" || true
+
+      - name: Ping Byters Platform Supabase
+        run: curl -I -X GET "https://rltcnrkvuyagnnsdywqv.supabase.co" || true
