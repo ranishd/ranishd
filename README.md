@@ -6,9 +6,10 @@ I am a Software Engineer obsessed with building high-performance, scalable syste
 My focus is on engineering zero-latency user experiences backed by robust, data-heavy architectures. I am deeply interested in how Large Language Models can be moved out of chat boxes and integrated directly into autonomous workflows, physics engines, and dynamic user interfaces.
 
 ### What I'm Building
-- **StellarX**: A high-frequency physics engine and autonomous OS for satellite constellations, utilizing Google Gemini for real-time hazard resolution.
-- **Health-Social**: A scalable, AI-driven healthcare triage platform designed to bridge the gap between patients and verified medical professionals.
-- **Enterprise Tooling**: Developing highly customizable, data-dense analytics dashboards optimized for supply chain intelligence and predictive modeling.
+- **StellarX:** [Live Demo](https://github.com/ranishd/StellarX) | A high-frequency physics engine and autonomous OS for satellite constellations, utilizing Google Gemini for real-time hazard resolution.
+- **Health-Social:** [Live Demo](https://github.com/ranishd/Health-Social) | A scalable, AI-driven healthcare triage platform designed to bridge the gap between patients and verified medical professionals.
+- **Byters Platform:** [Live Demo](https://byters-platform-5dvr8l4rj-ranishdutta-9686s-projects.vercel.app) | Developing highly customizable, data-dense analytics dashboards optimized for supply chain intelligence and predictive modeling.
+- **Supply Chain Dashboard:** [Live Demo](https://supply-chain-dashboard-2bhg6dn6l-ranishdutta-9686s-projects.vercel.app) | Real-time global supply chain risk management interface.
 
 ### Technical Arsenal
 - **Frontend Systems:** React, Vite, Tailwind CSS, WebGL/Three.js
