@@ -1,7 +1,7 @@
 name: Keep Everything Alive
 
 # Pings StellarX Render backend every 14 min (sleeps after 15 min idle)
-# and Supabase projects to prevent 7-day inactivity pause.
+# and queries Supabase databases with real REST calls to prevent 7-day pause.
 
 on:
   schedule:
@@ -17,14 +17,23 @@ jobs:
         run: |
           curl -fsS --max-time 30 "${{ secrets.STELLARX_RENDER_URL }}" || echo "StellarX ping failed or URL not set"
 
-      # ── SUPABASE ──
-      - name: Ping Supply Chain Dashboard (Supabase)
-        run: |
-          curl -fsS --max-time 15 -I "https://tobopzxfqkcfxfhkvdap.supabase.co" || echo "Ping failed"
+      # ── SUPABASE (real REST queries to count as activity) ──
 
-      - name: Ping Byters Platform (Supabase)
+      - name: Query Supply Chain Dashboard (Supabase)
         run: |
-          curl -fsS --max-time 15 -I "https://rltcnrkvuyagnnsdywqv.supabase.co" || echo "Ping failed"
+          curl -fsS --max-time 15 \
+            "https://tobopzxfqkcfxfhkvdap.supabase.co/rest/v1/" \
+            -H "apikey: ${{ secrets.SUPPLY_CHAIN_SUPABASE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPPLY_CHAIN_SUPABASE_KEY }}" \
+            || echo "Supply Chain Supabase query failed or key not set"
+
+      - name: Query Byters Platform (Supabase)
+        run: |
+          curl -fsS --max-time 15 \
+            "https://rltcnrkvuyagnnsdywqv.supabase.co/rest/v1/" \
+            -H "apikey: ${{ secrets.BYTERS_SUPABASE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.BYTERS_SUPABASE_KEY }}" \
+            || echo "Byters Supabase query failed or key not set"
 
       - name: Done
         run: echo "✅ Keep-alive pings sent at $(date -u)"
