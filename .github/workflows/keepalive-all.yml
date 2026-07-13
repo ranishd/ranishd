@@ -1,0 +1,53 @@
+name: Keep Everything Alive
+
+# Runs every 14 minutes to prevent Render free-tier cold sleep (15 min timeout)
+# and pings Supabase to prevent 7-day inactivity pause.
+
+on:
+  schedule:
+    - cron: '*/14 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping-services:
+    runs-on: ubuntu-latest
+    steps:
+      # ──────────────────────────────────────────────
+      #  RENDER BACKENDS
+      #  Add/remove URLs as you deploy new services.
+      #  Render free instances sleep after 15 min idle.
+      # ──────────────────────────────────────────────
+
+      - name: Ping StellarX Backend (Render)
+        run: |
+          # Replace with your actual Render URL for the StellarX server
+          curl -fsS --max-time 30 "${{ secrets.STELLARX_RENDER_URL }}" || echo "StellarX ping failed or URL not set"
+
+      - name: Ping Byters Engine Backend (Render)
+        run: |
+          curl -fsS --max-time 30 "${{ secrets.BYTERS_RENDER_URL }}" || echo "Byters ping failed or URL not set"
+
+      - name: Ping HRMS Backend (Render)
+        run: |
+          curl -fsS --max-time 30 "${{ secrets.HRMS_RENDER_URL }}" || echo "HRMS ping failed or URL not set"
+
+      - name: Ping Startup Simulator API (Render)
+        run: |
+          curl -fsS --max-time 30 "${{ secrets.STARTUP_SIM_RENDER_URL }}" || echo "Startup Sim ping failed or URL not set"
+
+      # ──────────────────────────────────────────────
+      #  SUPABASE DATABASES
+      #  A HEAD request to the project root is enough
+      #  to reset the 7-day inactivity timer.
+      # ──────────────────────────────────────────────
+
+      - name: Ping Supply Chain Dashboard (Supabase)
+        run: |
+          curl -fsS --max-time 15 -I "https://tobopzxfqkcfxfhkvdap.supabase.co" || echo "Supply Chain Supabase ping failed"
+
+      - name: Ping Byters Platform (Supabase)
+        run: |
+          curl -fsS --max-time 15 -I "https://rltcnrkvuyagnnsdywqv.supabase.co" || echo "Byters Supabase ping failed"
+
+      - name: Summary
+        run: echo "✅ All keep-alive pings sent at $(date -u)"

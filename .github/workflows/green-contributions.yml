@@ -1,0 +1,32 @@
+name: Green Contributions
+
+# Runs every 6 hours to add a contribution to your GitHub profile graph.
+# Updates only the .keepalive file — zero impact on any project code.
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  contribute:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update keepalive file
+        run: |
+          echo "${{ github.run_number }} | $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> .keepalive
+
+      - name: Commit and push
+        run: |
+          git config user.name  "Ranish"
+          git config user.email "ranishdutta@gmail.com"
+          git add .keepalive
+          git diff --cached --quiet && echo "Nothing to commit" && exit 0
+          git commit -m "🟢 auto: contribution $(date -u '+%b %d %H:%M UTC')"
+          git push
